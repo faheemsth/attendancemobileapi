@@ -112,6 +112,20 @@ public function attendance(Request $request)
             'errors' => 'The branch timezone is not configured. Please contact the administrator for assistance.'
         ], 422);  // 422 Unprocessable Entity status
     }
+    if ($branch->start_time=='') {
+        return response()->json([
+            'success' => false,
+            'message' => 'The branch shift start time  is not configured. Please contact the administrator for assistance.',
+            'errors' => 'The branch shift start time is not configured. Please contact the administrator for assistance.'
+        ], 422);  // 422 Unprocessable Entity status
+    }
+    if ($branch->end_time=='') {
+        return response()->json([
+            'success' => false,
+            'message' => 'The branch shift end time is not configured. Please contact the administrator for assistance.',
+            'errors' => 'The branch shift end time  is not configured. Please contact the administrator for assistance.'
+        ], 422);  // 422 Unprocessable Entity status
+    }
    // date_default_timezone_set( $timezone);
     // Validate the request and handle validation errors
     $validator = \Validator::make($request->all(), [
@@ -130,6 +144,7 @@ public function attendance(Request $request)
     }
 
     $employeeId = !empty(\Auth::user()->id) ? \Auth::user()->id : 0;
+    $employee = !empty(\Auth::user()) ? \Auth::user() : 0;
     $todayAttendance = AttendanceEmployee::where('employee_id', '=', $employeeId)
         ->where('date', date('Y-m-d'))
         ->first();
@@ -164,6 +179,11 @@ public function attendance(Request $request)
 
         if (empty($checkDb)) {
             $employeeAttendance = new AttendanceEmployee();
+            $employeeAttendance->shift_start = $branch->start_time;
+            $employeeAttendance->shift_end = $branch->end_time; 
+            $employeeAttendance->brand_id = $employee->brand_id;
+            $employeeAttendance->region_id = $employee->region_id;
+            $employeeAttendance->branch_id = $employee->branch_id;
             $employeeAttendance->employee_id = $employeeId;
             $employeeAttendance->date = $date;
             $employeeAttendance->status = 'Present';
@@ -190,6 +210,11 @@ public function attendance(Request $request)
 
         foreach ($checkDb as $check) {
             $employeeAttendance = new AttendanceEmployee();
+            $employeeAttendance->shift_start = $branch->start_time;
+            $employeeAttendance->shift_end = $branch->end_time; 
+            $employeeAttendance->brand_id = $employee->brand_id;
+            $employeeAttendance->region_id = $employee->region_id;
+            $employeeAttendance->branch_id = $employee->branch_id;
             $employeeAttendance->employee_id = $employeeId;
             $employeeAttendance->date = $date;
             $employeeAttendance->status = 'Present';
