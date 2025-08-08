@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    echo "Welcome to the Attendance Mobile API auto check pull script";
+    echo "Welcome to the Attendance Mobile API auto check pull script private branch";
 });
