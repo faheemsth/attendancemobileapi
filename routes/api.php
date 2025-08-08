@@ -38,6 +38,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('/logout', [LoginRegisterController::class, 'logout']);
     Route::post('/editProfile', [ProductController::class, 'editProfile']);
     Route::get('/getUserProfile', [ProductController::class, 'getUserProfile']);
+    Route::post('/totalSummary', [ProductController::class, 'totalSummary']);
     Route::post('/clockIn', [ProductController::class, 'attendance']);
     Route::post('/clockOut', [ProductController::class, 'clockOut']);
     Route::get('/attendanceStatus', [ProductController::class, 'getCurrentDayAttendance']);
