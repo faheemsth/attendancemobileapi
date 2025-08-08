@@ -1,0 +1,2 @@
+[14-Apr-2025 19:23:39 UTC] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home/convosoftserver/public_html/api.convosoftserver.com/app/Http/Controllers/ProductController.php on line 24
+[14-Apr-2025 19:24:17 UTC] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home/convosoftserver/public_html/api.convosoftserver.com/app/Http/Controllers/ProductController.php on line 24

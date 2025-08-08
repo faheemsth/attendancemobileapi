@@ -1,0 +1,8 @@
+[22-Jul-2025 23:25:40 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Seeder" not found in /home/convosoftserver/public_html/api.convosoftserver.com/database/seeders/DatabaseSeeder.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/convosoftserver/public_html/api.convosoftserver.com/database/seeders/DatabaseSeeder.php on line 8
+[23-Jul-2025 23:22:55 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Seeder" not found in /home/convosoftserver/public_html/api.convosoftserver.com/database/seeders/DatabaseSeeder.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/convosoftserver/public_html/api.convosoftserver.com/database/seeders/DatabaseSeeder.php on line 8

@@ -1,0 +1,6 @@
+[01-Oct-2024 12:08:02 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/scorpcor/public_html/api.scorp.co/vendor/nesbot/carbon/src/Carbon/Traits/Creator.php on line 146
+[01-Oct-2024 12:08:03 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/scorpcor/public_html/api.scorp.co/vendor/nesbot/carbon/src/Carbon/Traits/Creator.php on line 146
+[01-Oct-2024 12:08:15 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/scorpcor/public_html/api.scorp.co/vendor/nesbot/carbon/src/Carbon/Traits/Creator.php on line 146
+[01-Oct-2024 12:08:17 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes) in /home/scorpcor/public_html/api.scorp.co/vendor/nesbot/carbon/src/Carbon/Traits/Creator.php on line 146
+[04-Oct-2024 12:17:54 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\ProductController::branchDetail() in /home/scorpcor/public_html/api.scorp.co/app/Http/Controllers/ProductController.php on line 1011
+[04-Oct-2024 12:18:38 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\ProductController::branchDetail() in /home/scorpcor/public_html/api.scorp.co/app/Http/Controllers/ProductController.php on line 1011
