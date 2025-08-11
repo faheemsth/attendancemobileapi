@@ -484,7 +484,7 @@ public function viewAttendance(Request $request)
             $hoursWorked = $clockOut->diff($clockIn);
             $hoursWorkedFormatted = $hoursWorked->format('%H:%I:%S');
 
-            $earlyPunchOut = $attendance->earlyCheckOutReason == NULL ? 'Yes' : 'No'; 
+            $earlyPunchOut = $attendance->earlyCheckOutReason != NULL ? 'Yes' : 'No'; 
 
             $attendanceData[] = [
                 'date' =>               $formattedDate,
