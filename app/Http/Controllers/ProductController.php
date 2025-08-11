@@ -464,28 +464,37 @@ public function viewAttendance(Request $request)
                 'early_check_out_reason' => null,
             ];
         } else {
-            $clockIn = Carbon::parse($attendance->clock_in)->addHours($timezoneDifference);
+
+              $shift_start = Carbon::parse($attendance->shift_start); 
+               $shift_end = Carbon::parse($attendance->shift_end);
+            
+
+
+            $hourstotal = $shift_end->diff($shift_start);
+            $hourstotalFormatted = $hourstotal->format('%H:%I:%S');
+
+            $clockIn = Carbon::parse($attendance->clock_in);
             if($attendance->clock_out !== '00:00:00'){
-               $clockOut = Carbon::parse($attendance->clock_out)->addHours($timezoneDifference);
+               $clockOut = Carbon::parse($attendance->clock_in);
             }else{
-                $clockOut = Carbon::parse($attendance->clock_out)->addHours(0);
+                $clockOut = Carbon::parse($attendance->clock_out);
             }
 
 
             $hoursWorked = $clockOut->diff($clockIn);
             $hoursWorkedFormatted = $hoursWorked->format('%H:%I:%S');
 
-            $earlyPunchOut = $clockOut->diffInHours($clockIn) < 8 ? 'Yes' : 'No';
-            $status = $earlyPunchOut === 'Yes' ? 'Early Punch Out' : 'Present';
+            $earlyPunchOut = $attendance->earlyCheckOutReason == NULL ? 'Yes' : 'No'; 
 
             $attendanceData[] = [
-                'date' => $formattedDate,
-                'status' => $status,
-                'clock_in' => $clockIn->format('H:i:s'),
-                'clock_out' => $clockOut->format('H:i:s'),
-                'late' => $attendance->late,
-                'early_punch_out' => $earlyPunchOut,
-                'hours_worked' => $hoursWorkedFormatted,
+                'date' =>               $formattedDate,
+                'status' =>             $attendance->status,
+                'clock_in' =>           $attendance->clock_in,
+                'clock_out' =>          $attendance->clock_out,
+                'late' =>               $attendance->late,
+                'early_punch_out' =>    $earlyPunchOut,
+                'hours_worked' =>       $hoursWorkedFormatted,
+                'minimumTotalHours' =>       $hourstotalFormatted,
                 'early_check_out_reason' => $attendance->earlyCheckOutReason ?? null,
             ];
         }
