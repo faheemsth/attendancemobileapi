@@ -486,6 +486,15 @@ public function viewAttendance(Request $request)
 
             $earlyPunchOut = $attendance->earlyCheckOutReason != NULL ? 'Yes' : 'No'; 
 
+            if ($attendance->status == 'Absent') {
+                $attendance->clock_out = null;
+                $attendance->clock_in = null;
+            }
+            if ($attendance->status == 'Leave') {
+                $attendance->clock_out = null;
+                $attendance->clock_in = null;
+            }
+
             $attendanceData[] = [
                 'date' =>               $formattedDate,
                 'status' =>             $attendance->status,
