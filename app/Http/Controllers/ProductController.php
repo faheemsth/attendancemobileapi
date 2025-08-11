@@ -1356,6 +1356,12 @@ public function editProfile(Request $request)
         $absent = $records->where('status', 'Absent')->count();
         $leave = $records->where('status', 'Leave')->count();
         $holiday = $records->where('status', 'Holiday')->count();
+       $on_time_rate = $records->filter(function ($record) {
+                return $record->status === 'Present' && 
+                    $record->clock_in && 
+                    $record->shift_start &&
+                    strtotime($record->clock_in) <= strtotime($record->shift_start);
+            })->count();
         $total = $records->count();
 
         // Working days = All except holidays
@@ -1395,6 +1401,7 @@ public function editProfile(Request $request)
             'working_days' => $workingDays,
             'total_working_hours' => $totalWorking,
             'average_working_hours' => $avgWorking,
+           'on_time_rate' => $present > 0 ? round(($on_time_rate / $present) * 100, 2) : 0,
         ]);
     }
 
