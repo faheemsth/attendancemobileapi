@@ -1037,16 +1037,8 @@ function addNotifications($data = [])
             
            // $leaves = $query->where('employee_id', $user->id)->where('start_date','<', now())->orderBy('start_date', 'desc')->get();
 
-            $leaves = Leave::where('employee_id', $user->id)
-                    ->where(function($query) {
-                        // Leaves that have ended (end_date < today)
-                        $query->where('end_date', '<', now())
-                              // Or leaves that are ongoing but started in the past
-                              ->orWhere(function($q) {
-                                  $q->where('start_date', '<', now())
-                                    ->where('end_date', '>=', now());
-                              });
-                    })
+            $leaves =Leave::where('employee_id', $user->id)
+                    ->where('end_date', '<', now()->startOfDay()) // Only leaves that ended before today
                     ->orderBy('start_date', 'desc')->get();
            // $leaves = array_reverse($leaves);
 
