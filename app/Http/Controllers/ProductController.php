@@ -1050,6 +1050,58 @@ function addNotifications($data = [])
             'leaves' =>$leaves ,
         ]);
 
+}  
+ public function deleteLeave(Request $request)
+{
+    try {
+        $user = auth()->user();
+        
+        // Validate the request
+        $request->validate([
+            'leaveID' => 'required|integer|exists:leaves,id'
+        ]);
+
+        // Find the specific leave
+        $leave = Leave::where('employee_id', $user->id)
+                    ->where('id', $request->leaveID)
+                    ->first();
+
+        // Check if leave exists
+        if (!$leave) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Leave not found or not authorized to delete.'
+            ], 404);
+        }
+
+        // Check if leave status is Pending
+        if ($leave->status != 'Pending') {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You can only delete leaves with Pending status.'
+            ], 400);
+        }
+
+        // Delete the leave
+        if ($leave->delete()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Leave successfully deleted.'
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Failed to delete leave.'
+        ], 500);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'An error occurred while processing your request.',
+            'error' => env('APP_DEBUG') ? $e->getMessage() : null
+        ], 500);
+    }
 }
 
 public function createLeave(Request $request)
