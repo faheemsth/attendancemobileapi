@@ -1058,12 +1058,12 @@ function addNotifications($data = [])
         
         // Validate the request
         $request->validate([
-            'leaveID' => 'required|integer|exists:leaves,id'
+            'leave_id' => 'required|integer|exists:leaves,id'
         ]);
 
         // Find the specific leave
         $leave = Leave::with('User')->where('employee_id', $user->id)
-                    ->where('id', $request->leaveID)
+                    ->where('id', $request->leave_id)
                     ->first();
 
         // Check if leave exists
