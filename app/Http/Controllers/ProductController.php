@@ -1269,8 +1269,8 @@ public function getUserProfile(Request $request)
     if ($user) {
         return response()->json([
             'success'       => true,
-            'avtar_base_url'       => 'https://erp.convosoft.com/storage/uploads/avatar/',
-            'doc_base_url'       => 'https://erp.convosoft.com/public/EmployeeDocument/',
+            'avtar_base_url'       => 'https://backend.convosoftserver.com/EmployeeDocument/',
+            'doc_base_url'       => 'https://backend.convosoftserver.com/EmployeeDocument/',
             'employee_docs' => $employee_docs,
             'profileData'   => $user
         ], 200);
