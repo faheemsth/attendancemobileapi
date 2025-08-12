@@ -19,13 +19,42 @@ class Leave extends Model
         'created_by',
     ];
 
-    public function leaveType()
+     public function leaveType()
     {
         return $this->hasOne('App\Models\LeaveType', 'id', 'leave_type_id');
     }
 
     public function employees()
     {
-        return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
+        return $this->hasOne('App\Models\user', 'id', 'employee_id');
     }
+
+    public function User()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'employee_id');
+    }
+    public function branch()
+    {
+        return $this->hasOne('App\Models\Branch', 'id', 'branch_id');
+    }
+
+    public function brand()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'brand_id');
+    }
+
+    public function region()
+    {
+        return $this->hasOne('App\Models\Region', 'id', 'region_id');
+    }
+
+    public function created_by()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'created_by');
+    }
+    public function updated_by()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'updated_by');
+    }
+
 }

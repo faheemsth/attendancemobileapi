@@ -1062,7 +1062,7 @@ function addNotifications($data = [])
         ]);
 
         // Find the specific leave
-        $leave = Leave::where('employee_id', $user->id)
+        $leave = Leave::with('User')->where('employee_id', $user->id)
                     ->where('id', $request->leaveID)
                     ->first();
 
