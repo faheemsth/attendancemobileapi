@@ -1014,7 +1014,9 @@ function addNotifications($data = [])
 
 
             $user = \Auth::user(); 
-            $leaves = $query->where('employee_id', $user->id)->orderBy('start_date', 'desc')->get();
+            $leaves =Leave::where('employee_id', $user->id)
+                    ->where('start_date', '>', now()->startOfDay()) // Only leaves that ended before today
+                    ->orderBy('start_date', 'desc')->get();
            // $leaves = array_reverse($leaves);
 
 
