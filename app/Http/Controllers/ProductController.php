@@ -1084,6 +1084,31 @@ function addNotifications($data = [])
 
         // Delete the leave
         if ($leave->delete()) {
+
+             // Log the deletion activity
+        $logData = [
+            'type' => 'warning',
+            'note' => json_encode([
+               'title' => $leave->user->name. ' leave  deleted',
+                'message' => $leave->user->name. ' leave  deleted'
+            ]),
+            'module_id' => $leave->id,
+            'module_type' => 'leave',
+            'notification_type' => 'Leave deleted'
+        ];
+        $this->addLogActivity($logData);
+  // Log the deletion activity
+        $logData = [
+            'type' => 'warning',
+            'note' => json_encode([
+               'title' => $leave->user->name. ' leave  deleted',
+                'message' => $leave->user->name. ' leave  deleted'
+            ]),
+              'module_id' => $leave->employee_id,
+            'module_type' => 'employeeprofile',
+            'notification_type' => 'Leave Deleted'
+        ];
+        $this->addLogActivity($logData);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Leave successfully deleted.'
@@ -1157,6 +1182,27 @@ public function createLeave(Request $request)
 
     // Save the leave record
     $leave->save();
+
+   $this->addLogActivity([
+            'type' => 'success',
+              'note' => json_encode([
+                'title' => $leave->user->name. ' leave  created',
+                'message' => $leave->user->name. 'leave  created'
+            ]),
+            'module_id' => $leave->id,
+            'module_type' => 'leave',
+            'notification_type' => 'leave created',
+        ]);
+        $this->addLogActivity([
+                'type' => 'success',
+                'note' => json_encode([
+                    'title' => $leave->user->name. ' leave  created',
+                    'message' => $leave->user->name. 'leave  created'
+                ]),
+                'module_id' => $leave->employee_id,
+                'module_type' => 'employeeprofile',
+                'notification_type' => 'leave created',
+            ]);
 
     // Return success response
     return response()->json(['success' => __('Leave successfully created.')], 201);
