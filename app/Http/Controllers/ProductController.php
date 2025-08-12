@@ -1014,7 +1014,28 @@ function addNotifications($data = [])
 
 
             $user = \Auth::user(); 
-            $leaves = $query->where('employee_id', $user->id)->orderBy('id', 'desc')->get();
+            $leaves = $query->where('employee_id', $user->id)->orderBy('start_date', 'desc')->get();
+           // $leaves = array_reverse($leaves);
+
+
+        // Return response with only leaves data
+        return response()->json([
+            'leaves' =>$leaves ,
+        ]);
+
+}
+    public function getLeavesHistory(Request $request)
+{
+
+
+        // Build query for leaves without pagination, filters, and extra data
+        $query = Leave::query();
+
+
+
+            $user = \Auth::user(); 
+            
+            $leaves = $query->where('employee_id', $user->id)->where('start_date','<', now())->orderBy('start_date', 'desc')->get();
            // $leaves = array_reverse($leaves);
 
 
