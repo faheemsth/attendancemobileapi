@@ -1013,9 +1013,8 @@ function addNotifications($data = [])
 
 
 
-            $user = \Auth::user();
-            $employee = Employee::where('user_id', $user->id)->first();
-            $leaves = $query->where('employee_id', $employee->id)->orderBy('id', 'desc')->get();
+            $user = \Auth::user(); 
+            $leaves = $query->where('employee_id', $user->id)->orderBy('id', 'desc')->get();
            // $leaves = array_reverse($leaves);
 
 
@@ -1056,15 +1055,14 @@ public function createLeave(Request $request)
             'message' => 'User not found'
         ], 404);
     }
-
-    $employee = Employee::where('user_id', $user->id)->first();
+ 
 
            // dd( $user);
 
     // Create new Leave instance
     $leave = new Leave();
 
-    $leave->employee_id = $employee->id;
+    $leave->employee_id = $user->id;
     $leave->brand_id = $request->brand_id;
     $leave->region_id = $request->region_id;
     $leave->branch_id = $request->branch_id;
