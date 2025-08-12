@@ -1123,7 +1123,7 @@ function addNotifications($data = [])
     } catch (\Exception $e) {
         return response()->json([
             'status' => 'error',
-            'message' => 'An error occurred while processing your request.',
+            'message' => 'An error occurred while processing your request.'. $e->getMessage(),
             'error' => env('APP_DEBUG') ? $e->getMessage() : null
         ], 500);
     }
