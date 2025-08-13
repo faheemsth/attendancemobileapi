@@ -1043,9 +1043,7 @@ class ProductController extends Controller
     $leaves = Leave::where('employee_id', $user->id)
         ->where('status', 'Approved')
         ->whereYear('start_date', $currentYear) // Leaves starting in current year
-        ->orWhere(function($query) use ($currentYear) {
-            $query->whereYear('end_date', $currentYear); // Or ending in current year
-        })
+         
         ->orderBy('start_date', 'desc')
         ->get();
 
