@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('/attendance/view', [ProductController::class, 'viewAttendance']);
     Route::get('/getUserBranch', [ProductController::class, 'branchDetail']);
     Route::get('/getLeaves', [ProductController::class, 'getLeaves']);
+    Route::get('/getApprovedLeavesByCurrentYear', [ProductController::class, 'getApprovedLeavesByCurrentYear']);
     Route::post('/deleteLeave', [ProductController::class, 'deleteLeave']);
     Route::post('/updateLeave', [ProductController::class, 'updateLeave']);
     Route::get('/getLeavesHistory', [ProductController::class, 'getLeavesHistory']); // Added for leave history

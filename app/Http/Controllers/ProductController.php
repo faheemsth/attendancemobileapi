@@ -1023,7 +1023,40 @@ class ProductController extends Controller
         return response()->json([
             'leaves' => $leaves,
         ]);
+    } 
+    
+
+    public function getApprovedLeavesByCurrentYear(Request $request)
+{
+    $user = \Auth::user();
+    
+    if (!$user) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'User not found'
+        ], 404);
     }
+
+    // Get current year
+    $currentYear = now()->year;
+    
+    $leaves = Leave::where('employee_id', $user->id)
+        ->where('status', 'Approved')
+        ->whereYear('start_date', $currentYear) // Leaves starting in current year
+        ->orWhere(function($query) use ($currentYear) {
+            $query->whereYear('end_date', $currentYear); // Or ending in current year
+        })
+        ->orderBy('start_date', 'desc')
+        ->get();
+
+    return response()->json([
+        'status' => 'success', 
+        'leaves' => $leaves,
+        'current_year' => $currentYear,
+        'total_approved_leaves' => $leaves->count()
+         
+    ]);
+}
     public function getLeavesHistory(Request $request)
     {
 
