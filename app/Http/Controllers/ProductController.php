@@ -447,7 +447,7 @@ class ProductController extends Controller
             $formattedDate = $date->format('Y-m-d');
             $dayOfWeek = $date->format('l');
 
-              if ($formattedDate >= $today) continue;
+              if ($formattedDate > $today) continue;
 
             $attendance = $attendanceRecords->firstWhere('date', $formattedDate);
 
@@ -473,7 +473,7 @@ class ProductController extends Controller
                 $hourstotalFormatted = $hourstotal->format('%H:%I:%S');
 
                 $clockIn = Carbon::parse($attendance->clock_in);
-                if ($attendance->clock_out !== '00:00:00') {
+                if ($attendance->clock_out == '00:00:00') {
                     $clockOut = Carbon::parse($attendance->clock_in);
                 } else {
                     $clockOut = Carbon::parse($attendance->clock_out);
