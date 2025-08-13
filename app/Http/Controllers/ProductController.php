@@ -447,7 +447,7 @@ class ProductController extends Controller
             $formattedDate = $date->format('Y-m-d');
             $dayOfWeek = $date->format('l');
 
-            if ($formattedDate > $today) continue;
+              if ($formattedDate >= $today) continue;
 
             $attendance = $attendanceRecords->firstWhere('date', $formattedDate);
 
