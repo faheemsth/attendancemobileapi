@@ -7,7 +7,7 @@ header('Content-Type: text/plain');
 // Configuration
 $secret = 'VGNHKI*&^%$455tGFR!@#az_mobile_api_live_!@@';
 $project_path = '/home/convosoftserver/public_html/api.convosoftserver.com';
-$branch = 'main';
+$branch = 'live';
 $log_file = 'live-deploy.log';
 
 // Get the GitHub event type
