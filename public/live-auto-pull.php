@@ -67,5 +67,5 @@ file_put_contents($log_file, $log_entry, FILE_APPEND);
 
 
 
-echo "Deployment completed successfully";
+echo "Deployment completed successfully live testing";
 ?>
